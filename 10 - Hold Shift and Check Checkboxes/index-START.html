@@ -99,6 +99,45 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('input, [type=checkbox]');
+  // var shiftKeyPressed = false;
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+  // window.addEventListener('keydown', shiftKeyDown);
+  // window.addEventListener('keyup', shiftKeyUp);
+
+  let lastChecked;
+
+  // function shiftKeyDown(e){
+  //   if (e.key == 'Shift') {
+  //     shiftKeyPressed = true;
+  //   }
+  // }
+
+  // function shiftKeyUp(e) {
+  //   if (e.key == 'Shift') {
+  //     shiftKeyPressed = false;
+  //   }
+  // }
+
+
+  function handleCheck(e) {
+    let inBetween = false;
+    if (e.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween;
+        }
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+        // console.log(checkbox);
+      });
+
+    }
+
+    lastChecked = this;
+  }
 </script>
 </body>
 </html>
